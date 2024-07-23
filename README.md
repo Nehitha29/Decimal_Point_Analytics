@@ -7,9 +7,24 @@ This project is designed with a microservices architecture using FastAPI, a mode
 Architecture Overview
 The system comprises several microservices, each dedicated to a specific functionality:
 
-Authentication Service
-Points Service
-Review Service
-Link Management Service
+Authentication Service- port 8008
+
+
+Points Service-port 8050
+
+
+Review Service -port 8000,8001,9001,
+
+
+Link Management Service- port 9009
+
+
+commnet services -  port 8003
+
+HOW TO RUN ??
+uvicorn main:app --reload --port portnumber
+
+
+uvicorn folder:main:app --reload   --port portnumber 
 
 https://github.com/user-attachments/assets/7fd03034-8e9e-43f2-a7f8-d70dda86f707
