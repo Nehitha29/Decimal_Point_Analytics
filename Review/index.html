@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book and Movies Review </h1>
+
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for books or Movies...">
+            <button onclick="searchItems()">Search</button>
+        </div>
+<H1>BOOKS</H1>
+        <div class="card-container" id="card-container">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+       <h1>MOVIES</h1>
+        <div class="card-container" id="card-containertwo">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+
+        <div class="form-container">
+            <h2>Give Rating</h2>
+            <form id="item-form">
+                <input type="hidden" id="item-id">
+                <select id="item-type">
+                    <option value="book">Book</option>
+                    <option value="clothes">Movies</option>
+                </select>
+                <input type="text" id="item-title" placeholder="Title ">
+                <input type="text" id="item-author" placeholder="Author or Type">
+                <input type="text" id="item-description" placeholder="Rating">
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

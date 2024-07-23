@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2a2929;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #2a2929;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #ddd;
+}
+h2 {
+    text-align: center;
+    color: #ddd;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+.search-bar button:hover {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: aqua;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+.card button {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+.card button:hover {
+background-color: #e7706e;
+}
+
+.form-container {
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form select, form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+ form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    margin : auto;
+    width: 10%;
+    
+}
+form button:hover{
+    background-color: aqua;
+}

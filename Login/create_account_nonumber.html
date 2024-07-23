@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div class="create-account-container">
+        <h2>Create Account</h2>
+        <form id="create-account-form">
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <div id="success-message" style="display: none; color: green; text-align: center; margin-top: 10px;"></div>
+        <div id="error-message" style="display: none; color: red; text-align: center; margin-top: 10px;"></div>
+        <button id="login-button" style=" margin-top: 10px;">Back to Login</button>
+    </div>
+
+    <script>
+        document.getElementById('create-account-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('error-message').innerText = "Passwords do not match";
+                document.getElementById('error-message').style.display = "block";
+                document.getElementById('success-message').style.display = "none";
+                return;
+            }
+
+            var formData = new FormData(this);
+            fetch('http://127.0.0.1:8008/create_account', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.message === "Account created successfully") {
+                    document.getElementById('success-message').innerText = data.message;
+                    document.getElementById('success-message').style.display = "block";
+                    document.getElementById('error-message').style.display = "none";
+                } else {
+                    document.getElementById('error-message').innerText = data.message;
+                    document.getElementById('error-message').style.display = "block";
+                    document.getElementById('success-message').style.display = "none";
+                }
+            })
+            .catch(error => {
+                document.getElementById('error-message').innerText = 'An error occurred: ' + error.message;
+                document.getElementById('error-message').style.display = "block";
+                document.getElementById('success-message').style.display = "none";
+                console.error('Error:', error);
+            });
+        });
+        document.getElementById('login-button').addEventListener('click', function() {
+            window.location.href = '/index.html'; // Replace with the path to your login page
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="top-right-box" id="score-box">This is a box</div>
+    <div class="wishlist">
+        <h2>My Wishlist</h2>
+        <div id="wishlist-items"></div>
+        <!-- <div class="add-item">
+            <input type="number" id="item-id" placeholder="Item ID" />
+            <button onclick="addWishlistItem()">Add Item</button>
+        </div> -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            fetchScore();
+        });
+        function fetchScore() {
+            const userId = localStorage.getItem('email');
+            fetch(`http://127.0.0.1:8050/get_score/${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('score-box').innerHTML = `<h2> points : ${data.score}  </h2>`;
+                })
+                .catch(error => {
+                    document.getElementById('score-box').textContent = 'User not found';
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+
+
+        const email = localStorage.getItem('email');
+
+        async function getWishlist() {
+            const response = await fetch(`http://127.0.0.1:9009/users/${email}/wishlist/`);
+            const wishlist = await response.json();
+            const wishlistItemsDiv = document.getElementById('wishlist-items');
+            wishlistItemsDiv.innerHTML = '';
+            wishlist.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'wishlist-item';
+                div.textContent = `Item: ${item.item_name}`;
+                const button = document.createElement('button');
+                button.textContent = 'Get Link';
+
+
+                button.addEventListener('click', async () => {
+                    const userId = localStorage.getItem('email');
+                    const response3 = await fetch(`http://127.0.0.1:8050/get_score/${userId}`);
+                    const result2 = await response3.json();
+                    console.log(result2);
+                    if (result2.score >= 2) {
+                        const response2 = await fetch(`http://127.0.0.1:9001/search/${item.item_name}`);
+                        const result = await response2.json();
+                        console.log(result);
+                        const link = result.link;
+                        const score = -2;
+                        const response = await fetch('http://127.0.0.1:8050/save_score', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ userId, score }),
+                        });
+
+
+                    
+
+
+
+
+
+
+
+                        //const link = "https://www.google.com/";
+                        window.open(link, "_blank", height = 500, width = 300);
+                    }
+                    else {
+                        alert("No enough Coins  play game to get coins ");
+                    }
+                });
+
+                // Append the button to the div
+                div.appendChild(button);
+                wishlistItemsDiv.appendChild(div);
+            });
+        }
+
+        async function addWishlistItem() {
+            const itemId = document.getElementById('item-id').value;
+            if (!itemId) return;
+
+            await fetch(`http://127.0.0.1:9009/users/${email}/wishlist/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item_id: parseInt(itemId, 10), item_name: "abc" })
+            });
+
+            getWishlist();
+        }
+
+        getWishlist();
+    </script>
+</body>
+
+</html>
