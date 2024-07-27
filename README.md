@@ -22,9 +22,16 @@ The system comprises several microservices, each dedicated to a specific functio
 5.commnet services -  port 8003
 
 ### HOW TO RUN ??
+```bash
 uvicorn main:app --reload --port portnumber
+```
 
-
+```bash
 uvicorn folder:main:app --reload   --port portnumber 
+```
+
+### VEDIO 
 
 https://github.com/user-attachments/assets/7fd03034-8e9e-43f2-a7f8-d70dda86f707
+
+
