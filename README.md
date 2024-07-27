@@ -1,7 +1,7 @@
 
 
 
-###Introduction
+### Introduction
 This project is designed with a microservices architecture using FastAPI, a modern, fast (high-performance) web framework for building APIs with Python. Each microservice operates independently on different backend ports, providing distinct functionalities like user login, points retrieval, review handling, and link management. The microservices communicate with each other through well-defined APIs, ensuring a modular, scalable, and maintainable system.
 
 Architecture Overview
@@ -21,7 +21,7 @@ The system comprises several microservices, each dedicated to a specific functio
 
 5.commnet services -  port 8003
 
-###HOW TO RUN ??
+### HOW TO RUN ??
 uvicorn main:app --reload --port portnumber
 
 
